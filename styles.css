@@ -1,0 +1,20 @@
+
+body, html{
+    background: #181E24;
+    padding-top: 10px;
+}
+
+h1{
+    font-family: Roboto;
+    color: #fff;
+    margin-top:50px;
+    font-weight:200;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+  }
+canvas {
+    max-width: 600px;
+    margin: 0 auto;
+    display: block;
+}
