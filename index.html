@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>my stock anaylze site</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- <link href="styles.css" rel="stylesheet" type="text/css" media="all"> -->
+    <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/render-top-news.js"></script>
+</head>
+<body>
+    <h1>Analyze Companies Included In TOPIX-Small-1</h1>
+    <input type="text" id="search-field" placeholder="証券コードまたは会社名を入力" onkeydown="handleEnter(event)">
+    <button onclick="createSearchResult()">検索</button>
+    <p id="search-result-field"></p>
+    <h2>Top News</h2>
+    <div class="container">
+        <div></div>
+        <table id="my-table-1"></table>
+    </div>
+    <p id="top-news-field">ただいま処理中です</p>    
+</body>
+</html>

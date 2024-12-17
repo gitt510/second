@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/constatns.js"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <h1 id="h1-header"></h1>
+    <div class="button-container">
+        <button expr="3 month"  onclick="reloadAnalyzePage(this)">3ヵ月</button>
+        <button expr="1 year" onclick="reloadAnalyzePage(this)">1年</button>
+        <button expr="3 year" onclick="reloadAnalyzePage(this)">3年</button>
+    </div>
+    <div class="stock-price-chart-container">
+        <canvas id="mychart"></canvas>
+    </div>
+    <div class="macd-chart-container">
+        <canvas id="macd-chart"></canvas>
+    </div>
+    <div class="container">
+        <div class="box" id="simultion-result-1">SMA-CrossReturn</div>
+        <div class="box" id="simultion-result-2">EMA-CrossReturn</div>
+        <div class="box" id="simultion-result-3">MACD-CrossReturn</div>
+        <div class="box" id="simultion-result-4">RSI-DropReturn</div>
+    </div>
+    <script src="js/render-analyze.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+
+/* ==================================================
+ html body & header
+================================================== */
+body, html {
+    background: #ecf1f4;
+    padding-top: 10px;
+}
+
+h1 {
+    font-family: Roboto;
+    /* color: #fff; */
+    margin-top:15px;
+    font-weight:200;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+}
+
+/* ==================================================
+/ table
+================================================== */
+th {
+    padding: 10px;
+    background: #778ca3;
+    border: solid 1px #666666;
+    color: #ffffff;
+}
+td {
+    padding: 10px;
+    border: solid 1px #666666;
+}
+td:first-child {
+    background: #e9faf9;
+   
+}
+
+/* ==================================================
+/ button
+================================================== */
+.button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+/* ==================================================
+/ flex container
+================================================== */
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1px;
+}
+
+.container {
+    display: flex;
+}
+
+.box {
+    margin: 5px;  /* 子要素の間隔 */
+}
+
+/* ==================================================
+ chart js
+================================================== */
+.stock-price-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mychart {
+    max-width: 1600px;
+    max-height: 400px;
+    /* margin: 0 auto; */
+    /* border: 1px solid #ccc; */
+}
+
+.macd-chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#macd-chart {
+    max-width: 1600px;
+    max-height: 200px;
+    /* margin: 0 auto; */
+    /* align-items: center; */
+    /* border: 1px solid #ccc; */
+}
