@@ -160,6 +160,7 @@ function render_stock_prices_chart(ctx, dates, stockPrices, movingAverages, divi
             },
             stacked: false,
             scales: {
+                x: {display: false},
                 yLeft: {type: 'linear', position: 'left'},
                 yRight: {type: 'linear', position: 'right', beginAtZero: true}
             },

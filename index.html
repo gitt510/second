@@ -6,25 +6,43 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- <link href="styles.css" rel="stylesheet" type="text/css" media="all"> -->
     <script src="js/utils.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/render-top-news.js"></script>
+    <script src="js/render-news.js"></script>
     <script src="js/render-favorite.js"></script>
+    <script src="js/render-search.js"></script>
 </head>
 <body>
     <h1>Analyze Companies Included In TOPIX-Small-1</h1>
-    <input type="text" id="search-field" placeholder="証券コードまたは会社名を入力" onkeydown="handleEnter(event)">
-    <button onclick="createSearchResult()">検索</button>
-    <p id="search-result-field"></p>
-    <h2>Top News</h2>
-    <div class="container">
-        <div>
+    <nav>
+        <a href="#" data-section="news">news</a>
+        <a href="#" data-section="favorite">favorite</a>
+        <a href="#" data-section="search">search</a>
+    </nav>
+    <sction id="news" class="section active">
+        <p id="search-result-field">
             <table id="my-table-1"></table>
+        </p>
+    </sction>
+    <section id="favorite" class="section">
+        <div class="list-title">favorite list</div>
+        <ul class="favorite-list" id="favorite-list"></ul>
+    </section>
+    <sction id="search" class="section">
+        <div class="search-container">
+            <input type="text" id="search-field" placeholder="証券コードまたは会社名を入力" onkeydown="handleEnter(event)">
         </div>
-        <div>
-            <div class="list-title">my favorites</div>
-            <ul class="favorite-list" id="favorite-list"></ul>
-        <div>
-    </div>
-    <!-- <p id="top-news-field">ただいま処理中です</p> -->
+        <div id="search-result"></div>
+    </sction>
+    <script>
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const sectionId = this.getAttribute('data-section');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
