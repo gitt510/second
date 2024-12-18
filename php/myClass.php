@@ -87,6 +87,53 @@ class MyDB {
         return $items;
     }
 
+    function getFavorites($params) {
+        $pdo = $this->getPdo();
+        $code = $params['code'] ?? null;
+        if ($code == null) {
+            $query = "SELECT * FROM favorites WHERE is_favorite = 1";
+            $stmt = $pdo->query($query);
+            $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $items;
+        } else {
+            $query = "SELECT * FROM favorites WHERE code = $code";
+            $stmt = $pdo->query($query);
+            $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $items;
+        }
+    }
+
+    function updateFavorites($params){
+        $pdo = $this->getPdo();
+        $code = $params['code'];
+        $name = $params['name'];
+        $isFavorite = $params['value'];
+        $currentTime = date("Y-m-d H:i:s");
+        $pdo->beginTransaction();
+        try {
+            $query = "UPDATE favorites "
+                     ."SET is_favorite = ?, updated_at = ? "
+                     ."WHERE code = ?";
+            $stmt = $pdo->prepare($query);
+            $stmt->execute([$isFavorite, $currentTime, $code]);
+            $pdo->commit();
+            // $query = "DELETE FROM favorites WHERE code = ?";
+            // $stmt = $pdo->prepare($query);
+            // $stmt->execute([$code]);
+            // $query = "INSERT INTO favorites (code, name, is_favorite) VALUES (?, ?, ?)";
+            // $stmt = $pdo->prepare($query);
+            // $stmt->execute([$code, $name, $isFavorite]);
+            // $pdo->commit();
+            return ['data' => [$code, $name, $isFavorite], 'status' => 'success'];
+        } catch (PDOException $e) {
+            $pdo->rollBack();
+            return ['error' => $e->getMessage()];
+        }
+
+    }
+
+
+
     function calcMovingAverage($array, $period) {
         // define variable
         $movingAverages = [];
@@ -335,8 +382,6 @@ class MySimulator {
         //
         return $results;
     }
-
-
 }
 
 ?>

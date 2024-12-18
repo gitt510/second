@@ -13,8 +13,10 @@ h1 {
     margin-top:15px;
     font-weight:200;
     text-align: center;
-    display: block;
     text-decoration: none;
+    /* display: inline-flex;
+    align-items: center;
+    justify-content: center; */
 }
 
 /* ==================================================
@@ -36,8 +38,51 @@ td:first-child {
 }
 
 /* ==================================================
+/ list
+================================================== */
+.list-title {
+    /* background-color: #778ca3; */
+    /* border: solid 1px #666666; */
+    color: black;
+    padding: 10px;
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.favorite-list {
+    list-style-type: none;
+    padding: 0 0.5em;
+    margin: 0;
+    /* border: 2px solid #2589d0; */
+}
+
+.favorite-list li {
+    font-size: 1.5em;
+    padding: .1em;
+    /* transition: white 0.3s ease; */
+}
+
+.favorite-list li:not(:last-child) {
+    border-bottom: 1.5px dashed #000;
+}
+
+/* .favorite-list li:hover {
+    background-color: #f1f1f1;
+} */
+/* 
+.favorite-list li::marker {
+    color: #2589d0;
+    font-size: 1.1em;
+} */
+
+
+
+
+/* ==================================================
 / button
 ================================================== */
+
 .button {
     background-color: #4CAF50;
     color: white;
@@ -45,7 +90,27 @@ td:first-child {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-  }
+}
+
+.favorite-container {
+    text-align: center;
+}
+
+.favorite-star {
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #cccccc;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.favorite-star.is_favorite {
+    color: #ffd700;
+}
+
+.favorite-star:hover {
+    transform: scale(1.1);
+}
+
 /* ==================================================
 / flex container
 ================================================== */

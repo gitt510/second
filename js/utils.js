@@ -12,8 +12,9 @@ function handleEnter(event) {
 function reloadAnalyzePage(button) {
     // get company code & name from current url
     const searchParams = new URLSearchParams(window.location.search);
-    const name = searchParams.get('name');
     const code = searchParams.get('code');
+    const name = searchParams.get('name');
+
 
     // get expr from button attribue
     let expr = button.getAttribute('expr');
@@ -33,7 +34,29 @@ function reloadAnalyzePage(button) {
     window.location.href = url;
 }
 
+function toggleFavorite(button) {
+    // const isFavorite = this.classList.contains('is_favorite')
+    // 状態を反転
+    button.classList.toggle('is_favorite');
 
+    // 反転した状態をdbにupload
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get('code');
+    const name = searchParams.get('name');
+    const isFavorite = Number(button.classList.contains('is_favorite'));
+    console.log(code, isFavorite);
+    fetch(`php/manage-favorite.php?action=update&code=${code}&name=${name}&value=${isFavorite}`)
+        .then(resp => resp.json())
+        .then(Data => {
+            console.log(Data);
+        })
+    .catch(error => {
+        console.error('Error:', error);
+        fetch(`php/manage-favorite.php?action=update&code=${code}&name=${name}&value=${isFavorite}`)
+        .then(response => response.text())
+        .then(data => console.log('Error response:', data))
+    });
+}
 
 
 /* ========================================

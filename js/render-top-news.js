@@ -2,7 +2,7 @@
 fetch("php/make-top-news.php")
     .then(response => response.json())
     .then(data => {  
-        //
+        // sort result 
         data.sort(function(a, b) {
             if (a.latest_event_date > b.latest_event_date) return -1;
             if (a.latest_event_date < b.latest_event_date) return 1;

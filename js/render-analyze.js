@@ -12,51 +12,62 @@ const title = `${code} ${name}`
 document.title = title
 
 // change h1-header text
-const h1 = document.getElementById('h1-header'); 
-h1.innerText = title;
+const h1Title = document.getElementById('h1-title');
+h1Title.textContent = title;
 
-const drawBackground = {
-    id: 'drawBackground',
-    defaults: {
-        diviedends: null,
-    },
-    afterDraw(chart, args, options) {
-        // get property of drawing chart
-        var ctx = chart.ctx;
-        var labels = chart.data.labels;
-        var xscale = chart.scales["x"];
-        var yscale = chart.scales["leftY"];
+// 
+const favoriteStar = document.getElementById('favorite-star')
+fetch(`php/manage-favorite.php?action=get&code=${code}`)
+    .then(response => response.json())
+    .then(Data => {
+        console.log(Data);
+        const isFavorite = Data[0].is_favorite;
+        console.log(isFavorite);
+        favoriteStar.classList.toggle('is_favorite', isFavorite)
+    })
 
-        //
-        function extractSpecificMonthDates(array, month) {
-            const ret = array.filter(elem => {
-                const date = new Date(elem);
-                return date.getMonth() === month;
-            });
-            return ret.reduce((acc, elem) => {
-                const year = new Date(elem).getFullYear();
-                if (!acc[year]) {
-                    acc[year] = [];
-                }
-                acc[year].push(elem);
-                return acc;
-            }, {});
-        }
+// const drawBackground = {
+//     id: 'drawBackground',
+//     defaults: {
+//         diviedends: null,
+//     },
+//     afterDraw(chart, args, options) {
+//         // get property of drawing chart
+//         var ctx = chart.ctx;
+//         var labels = chart.data.labels;
+//         var xscale = chart.scales["x"];
+//         var yscale = chart.scales["leftY"];
 
-        // fill 
-        options.diviedends.forEach((data) => {
-            const monthDates = extractSpecificMonthDates(labels, data);
-            for (const [year, dates] of Object.entries(monthDates)) {
-                var left = xscale.getPixelForValue(labels.indexOf(dates.at(0)));
-                var right = xscale.getPixelForValue(labels.indexOf(dates.at(-1))); 
-                var top = yscale.top;
-                console.log(left, right, top);
-                ctx.fillStyle = "rgba(0, 0, 255, 0.2)";
-                ctx.fillRect(left, top, right - left, yscale.height);
-            }
-        })
-    }
-};
+//         //
+//         function extractSpecificMonthDates(array, month) {
+//             const ret = array.filter(elem => {
+//                 const date = new Date(elem);
+//                 return date.getMonth() === month;
+//             });
+//             return ret.reduce((acc, elem) => {
+//                 const year = new Date(elem).getFullYear();
+//                 if (!acc[year]) {
+//                     acc[year] = [];
+//                 }
+//                 acc[year].push(elem);
+//                 return acc;
+//             }, {});
+//         }
+
+//         // fill 
+//         options.diviedends.forEach((data) => {
+//             const monthDates = extractSpecificMonthDates(labels, data);
+//             for (const [year, dates] of Object.entries(monthDates)) {
+//                 var left = xscale.getPixelForValue(labels.indexOf(dates.at(0)));
+//                 var right = xscale.getPixelForValue(labels.indexOf(dates.at(-1))); 
+//                 var top = yscale.top;
+//                 console.log(left, right, top);
+//                 ctx.fillStyle = "rgba(0, 0, 255, 0.2)";
+//                 ctx.fillRect(left, top, right - left, yscale.height);
+//             }
+//         })
+//     }
+// };
 // Chart.register(drawBackground);
 
 // get and show stock prices data by using fetch API and php script

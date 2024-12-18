@@ -1,3 +1,4 @@
+
 function createSearchResult() {
     fetch('php/index.php')
     .then(response => response.json())

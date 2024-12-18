@@ -4,15 +4,15 @@ header('Content-Type: application/json');
 
 try {
 
-    // // if json data is already exists >> skip process
-    // $today = date("Ymd");
-    // $fileName = "../data/topix_small_1/goldencross/" . "$today.json";
-    // if (file_exists(($fileName))) 
-    // {
-    //     $jsonData = json_decode(file_get_contents($fileName), true);
-    //     echo json_encode(['recentCross' => $jsonData]);
-    //     exit();
-    // }
+    // if json data is already exists >> skip process
+    $today = date("Ymd");
+    $fileName = "../data/topix_small_1/topnews/" . "$today.json";
+    if (file_exists(($fileName))) 
+    {
+        $jsonData = json_decode(file_get_contents($fileName), true);
+        echo json_encode($jsonData);
+        exit();
+    }
 
     // include php file
     include('myClass.php');
@@ -141,59 +141,12 @@ try {
             'latest_close' => $latestClose
         ];
         $results[] = $result;
-
-        // // if the golden cross is occured before 14 day, store it
-        // $today = new DateTime();
-        // $xDayBefore = $today->modify('-14 day');
-        // foreach ($goldenCross as $data) {
-        //     // get 
-        //     $eventDate = $data['date'];
-        //     $nextDayIdx = array_search($eventDate, $dates) + 1;
-        //     $open =  $dailyData[$nextDayIdx]['open'] ?? null;
-
-        //     //
-            
-        //     if (new Datetime($eventDate) >= $xDayBefore) {
-        //         $recentCross[] = [
-        //             'code' => $code,
-        //             'name' => $name,
-        //             'date' => $eventDate,
-        //             'open' => $open,
-        //             'latest_date' => end($dailyData)['date'],
-        //             'latest_close' => end($dailyData)['close']
-        //         ];
-        //     }
-        // }
-
-        // $rsiData = $fetcher->getOscillators($params = ['code' => $code, 'expr' => 14]);
-        // foreach ($rsiData as $data) {
-        //     $rsi = $data['rsi_14'];
-        //     if ($rsi <= 30) {
-        //         #
-        //         $eventDate = $data['date'];
-        //         $nextDayIdx = array_search($eventDate, $dates) + 1;
-        //         $open =  $dailyData[$nextDayIdx]['open'] ?? null;
-
-        //         #
-        //         $recentDrop[] = [
-        //             'code' => $code,
-        //             'name' => $name,
-        //             'date' => $eventDate,
-        //             'open' => $open,
-        //             'latest_date' => end($dailyData)['date'],
-        //             'latest_close' => end($dailyData)['close']
-        //         ];
-        //     }
-        // }    
-    // 
-    // $ret = [
-    //     'recent_cross' => $recentCross,
-    //     'recent_drop' => $recentDrop,
-    // ];
-    // $results = json_encode($recentCross, JSON_UNESCAPED_UNICODE);
-    // file_put_contents($fileName, $results);
     }
 
+    // save results
+    file_put_contents($fileName, json_encode(($results)));
+
+    // return rsults
     echo json_encode($results);
     
 } catch(Exception $e) {
