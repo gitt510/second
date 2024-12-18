@@ -13,7 +13,7 @@ function createSearchResult() {
          });
 
         // render result
-        const resultField = document.getElementById('search-result-field');
+        const resultField = document.getElementById('search-result');
         resultField.innerHTML = '';
         if (inputValue) {
             companies.forEach(elem => {
